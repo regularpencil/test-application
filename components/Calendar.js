@@ -1,32 +1,18 @@
 import styles from "../styles/Calendar.module.scss";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Image from "next/image";
 
-const months = [
-    {name: "Январь"},
-    {name: "Февраль"},
-    {name: "Март"},
-    {name: "Апрель"},
-    {name: "Май"},
-    {name: "Июнь"},
-    {name: "Июль"},
-    {name: "Август"},
-    {name: "Сентябрь"},
-    {name: "Октябрь"},
-    {name: "Ноябрь"},
-    {name: "Декабрь"},
-];
-
-const daysOfTheWeek = ["Пн", "Вт","Ср", "Чт","Пт", "Сб", "Вс"];
-
 function Calendar() {
+    const dispatch = useDispatch();
 
-    const [currentMonth, setCurrentMonth] = useState(1);
-    const [currentDay, setCurrentDay] = useState(1);
-    const [currentYear, setCurrentYear] = useState(2000);
-    const [numberOfDays, setNumberOfDays] = useState(1);
+    const currentDay = useSelector(state=>state.calendar.currentDay);
+    const currentMonth = useSelector(state=>state.calendar.currentMonth);
+    const currentYear = useSelector(state=>state.calendar.currentYear);
+    const numberOfDays = useSelector(state=>state.calendar.numberOfDays);
+    const months = useSelector(state=>state.calendar.months);
+    const daysOfTheWeek = useSelector(state=>state.calendar.daysOfTheWeek);
     const [appointmentDates, setAppointmentDates] = useState({});
     const [lastDays, setLastDays] = useState([]);
 
@@ -35,9 +21,9 @@ function Calendar() {
     useEffect(function(){
         const currentDate = new Date;
         const splitedDateInfo = currentDate.toLocaleDateString().split(".");
-        setCurrentDay(Number(splitedDateInfo[0]));
-        setCurrentMonth(Number(splitedDateInfo[1])-1);
-        setCurrentYear(Number(splitedDateInfo[2]));
+        dispatch({type:"SET_CURRENT_DAY", payload:Number(splitedDateInfo[0])});
+        dispatch({type:"SET_CURRENT_MONTH", payload:Number(splitedDateInfo[1])-1});
+        dispatch({type:"SET_CURRENT_YEAR", payload:Number(splitedDateInfo[2])});
     },[])
 
     useEffect(function(){
@@ -54,26 +40,26 @@ function Calendar() {
     }, [appointments])
 
     useEffect(function(){
-        setNumberOfDays(new Date(currentYear, currentMonth+1, 0).getDate());
+        dispatch({type:"SET_NUMBER_OF_DAYS", payload:new Date(currentYear, currentMonth+1, 0).getDate()});
         checkWeekBegin();
     }, [currentMonth])
 
 
     function prevMonth(){
         if(currentMonth-1 < 1){
-            setCurrentMonth(11);
-            setCurrentYear(currentYear-1);
+            dispatch({type:"SET_CURRENT_MONTH", payload:11});
+            dispatch({type:"SET_CURRENT_YEAR", payload:currentYear-1});
         } else {
-            setCurrentMonth(currentMonth-1);
+            dispatch({type:"SET_CURRENT_MONTH", payload:currentMonth-1});
         }
     }
 
     function nextMonth(){
         if(currentMonth + 1 > 11){
-            setCurrentMonth(1);
-            setCurrentYear(currentYear+1);
+            dispatch({type:"SET_CURRENT_MONTH", payload:1});
+            dispatch({type:"SET_CURRENT_YEAR", payload:currentYear+1});
         } else {
-            setCurrentMonth(currentMonth+1);
+            dispatch({type:"SET_CURRENT_MONTH", payload:currentMonth+1});
         }
     }
 
