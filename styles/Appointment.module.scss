@@ -1,0 +1,57 @@
+.appointment {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-width: 475px;
+    width: 100%;
+    box-shadow: 0px 0px 5px #EBE7FF;
+    border-radius: 5px;
+
+    .date {
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 500;
+        color: #000000;
+        margin-bottom: 5px;
+    }
+
+    .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .wrapper {
+        display: flex;
+        column-gap: 10px;
+        align-items: center;
+    }
+
+    .name {
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .specialization {
+        font-size: 14px;
+        line-height: 17px;
+        color: #EBE7FF;
+    }
+
+    .button {
+        padding: 10px 15px;
+        color: #fff;
+        background-color: #7761FF;
+        border-radius: 5px;
+        border: none;
+        cursor:pointer;
+        transition: 0.3s all ease;
+
+        &:hover {
+            background-color: #5241c2;
+        }
+    }
+}

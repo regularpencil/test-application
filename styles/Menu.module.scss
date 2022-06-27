@@ -1,0 +1,29 @@
+.menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .link {
+        display: flex;
+        align-items: center;
+        column-gap: 14px;
+        padding: 15px 18px;
+        transition: 0.3s all ease;
+        color: #fff;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #FCFCFC;
+            color:#7761FF;
+        }
+
+        &_active {
+            background-color: #FCFCFC;
+            color: #7761FF;
+        }
+    }
+
+    .text {
+        font-size: 14px;
+    }
+}

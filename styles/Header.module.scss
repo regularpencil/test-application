@@ -1,0 +1,28 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 40px;
+    background-color: #50CAFF;
+    
+    .pageName {
+        font-size: 28px;
+        line-height: 33px;
+        color: #fff;
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+    }
+
+    .icon {
+        cursor: pointer;
+    }
+
+    .avatar {
+        border: 2px solid white;
+        cursor: pointer;
+    }
+}
